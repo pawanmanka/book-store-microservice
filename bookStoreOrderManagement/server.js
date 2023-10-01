@@ -8,6 +8,6 @@ app.get('/', (req, res) => {
 });
 app.use('/api/v1/orders',OrderRoutes);
 
-app.listen(3000, () =>
-  console.log('Server app listening on port http://localhost:'.process.env.PORT),
+app.listen(process.env.PORT, () =>
+  console.log('Server app listening on port http://localhost:'+process.env.PORT),
 );
