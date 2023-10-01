@@ -3,13 +3,11 @@ import 'dotenv/config';
 // Import Routes
 import BookRoutes from './routes/books.routes.js';
 import {db} from './config/database.config.js';
+import Books from './models/books.model.js';
 
-db.authenticate().then(() => {
-  console.log('Connection has been established successfully.');
-}).catch((error) => {
-  console.error('Unable to connect to the database: ', error);
-});
 const app = express();
+const BooksRes = await Books.findAll();
+console.log(BooksRes);
 app.get('/', (req, res) => {
   res.send(`Hello World! ${process.env.PORT}`);
 });
