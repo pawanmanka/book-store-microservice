@@ -4,11 +4,20 @@ export async function getAllList(req,res){
     return await Order.findAll();
 }
 export async function getOrderDetails(req,res){
-    return await Order.findOne({
+    let order  = await Order.findOne({
         where: {
            id: req.params.orderId
         }
-     });
+    });
+    if(!order){
+        return {error:"Order not found."};
+    }    
+    return await axios.get(process.env.BOOK_MANAGEMENT_ENDPOINT+'/v1/books/'+order.book_id)
+    .then(async function (response) {
+        order.setDataValue("books",response?.data?.data);
+        console.log(order);
+        return order;
+    })
 }
 export async function addOrder(req,res){
     let { customer_name,book_id} = req.body;
