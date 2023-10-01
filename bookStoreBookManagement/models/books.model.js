@@ -1,9 +1,20 @@
-import {db} from '../config/database.config.js';
-const Books = db.define("books", {
-    id: db.INTEGER,
-    title: db.String,
-    author: db.String,
-    price: db.String,
+import {sequelize} from '../utils/database.utils.js';
+import{ DataTypes } from "sequelize";
+const Books = sequelize.define("books", {
+    id: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    title:  {
+        type: DataTypes.STRING,
+    },
+    author:  {
+        type: DataTypes.STRING,
+    },
+    price:  {
+        type: DataTypes.DOUBLE,
+    },
 });
-db.sync();
 export default Books;

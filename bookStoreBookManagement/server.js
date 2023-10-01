@@ -1,13 +1,19 @@
 import express from 'express';
 import 'dotenv/config';
+import bodyParser from "body-parser";
 // Import Routes
 import BookRoutes from './routes/books.routes.js';
-import {db} from './config/database.config.js';
-import Books from './models/books.model.js';
-
+import {sequelize } from './utils/database.utils.js';
 const app = express();
-const BooksRes = await Books.findAll();
-console.log(BooksRes);
+// body parser for post request 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+sequelize .authenticate().then(() => {
+  console.log('Connection has been established successfully.');
+}).catch((error) => {
+  console.error('Unable to connect to the database: ', error);
+});
 app.get('/', (req, res) => {
   res.send(`Hello World! ${process.env.PORT}`);
 });
