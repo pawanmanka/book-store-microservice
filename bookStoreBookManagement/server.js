@@ -15,7 +15,7 @@ sequelize .authenticate().then(() => {
   console.error('Unable to connect to the database: ', error);
 });
 app.get('/', (req, res) => {
-  res.send(`Hello World! ${process.env.PORT}`);
+  res.send(`Book Store : Book Management Service Working On : ${process.env.PORT}`);
 });
 app.use('/api/v1/books',BookRoutes);
 

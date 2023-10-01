@@ -1,34 +1,24 @@
-import { getAllList,getBookDetails,addBook,bookDelete } from '../services/orders.service.js';
-
-export async function getAllBooks (req,res){
-    let allBooks = await getAllList();
-    res.status(200).json({success:true,data:allBooks});
-    // getAllList().then(data => res.status(200).json({success:true,data:data}))
+import { getAllList,getOrderDetails,addOrder,orderDelete } from '../services/orders.service.js';
+export async function getAllOrders (req,res){
+    let allOrders = await getAllList();
+    res.status(200).json({success:true,data:allOrders});
 }
-export async function getBookById (req,res){
-    let book = await getBookDetails(req);
-    res.status(200).json({success:true,data:book});
-    // getAllList().then(data => res.status(200).json({success:true,data:data}))
+export async function getOrderById (req,res){
+    let Order = await getOrderDetails(req);
+    res.status(200).json({success:true,data:Order});
 }
-export async function createBook (req,res){
-    let book = await addBook(req);
-    if(book.error){
-        res.status(400).json({msg:"Something went wrong."});
+export async function createOrder (req,res){
+    let Order = await addOrder(req);
+    if(Order.error){
+        res.status(400).json({msg:Order.error});
     }
-    res.status(200).json({success:true,data:book});
-}
-export async function updateBook (req,res){
-    let book = await updateBookDetail(req);
-    if(book.error){
-        res.status(400).json({msg:"Something went wrong."});
-    }
-    res.status(200).json({success:true,data:book});
+    res.status(200).json({success:true,data:Order});
 }
 
-export async function removeBook (req,res){
-    let book = await bookDelete(req);
-    if(book.error){
+export async function removeOrder (req,res){
+    let Order = await orderDelete(req);
+    if(Order.error){
         res.status(400).json({msg:"Something went wrong."});
     }
-    res.status(200).json({success:true,data:book});
+    res.status(200).json({success:true,data:Order});
 }
